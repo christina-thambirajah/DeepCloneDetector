@@ -1,0 +1,9 @@
+Flask
+firebase-admin
+waitress
+flask_cors
+keras
+tensorflow
+numpy
+javalang
+configparser

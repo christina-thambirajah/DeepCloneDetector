@@ -1,0 +1,25 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+
+# dependencies
+
+/Model/TrainingData
+/Model/TokenizedData
+/Model
+
+
+
+.history
+
+/Storage
+
+/_pycache_
+
+/CloneDetection/ClassificationModel/SavedModel_AAE_Encoder
+/CloneDetection/ClassificationModel/AE_Model
+
+/Model/__pycache__
+/Model/.idea
+
+/__pycache__
+.idea

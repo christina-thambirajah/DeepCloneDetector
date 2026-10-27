@@ -1,0 +1,74 @@
+<div class="row" style="margin-top:100px;">
+  <div class="col-md-8">
+    <h3 style="margin-top:15px;">Clones Detected in {{currentProject.name}}</h3>
+  </div>
+  <div class="col-md-4">
+    <select [ngModel]="currentProjectID" class="dropdown btn btn-neutral btn-outline-primary" style="width:250px;float:right;"
+      (ngModelChange)="onSelectChanged($event)">
+      <option *ngFor="let project of projects" [ngValue]="project.id">{{project.name}}</option>
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <p>Click on row to view source code</p>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive" style="overflow: auto;">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Syntax Clone
+              </th>
+              <th>
+                File Name
+              </th>
+              <th>
+                Start Line
+              </th>
+              <th>
+                End Line
+              </th>
+              <th>
+                File Name
+              </th>
+              <th>
+                Start Line
+              </th>
+              <th>
+                End Line
+              </th>
+            </thead>
+            <tbody *ngFor="let codePair of currentCloneList" (click)="OpenModel(codePair)">
+              <th class="td-name">
+                {{codePair[2]}}
+              </th>
+              <th class="th-row" style="font-weight:normal">
+                {{codePair[0].FileName}}
+              </th>
+              <th class="th-row">
+                {{codePair[0].Start}}
+              </th>
+              <th class="th-row">
+                {{codePair[0].End}}
+              </th>
+              <th class="th-row" style="font-weight:normal">
+                {{codePair[1].FileName}}
+              </th>
+              <th class="th-row">
+                {{codePair[1].Start}}
+              </th>
+              <th class="th-row">
+                {{codePair[1].End}}
+              </th>
+            </tbody>
+            <tbody *ngIf="currentCloneList.length == 0"> <th colspan="7" style="width:100%;text-align:center;font-weight:normal">  No clones were detected in this project</th></tbody>
+           
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

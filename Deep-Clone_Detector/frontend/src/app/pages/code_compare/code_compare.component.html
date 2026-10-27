@@ -1,0 +1,30 @@
+<div style="overflow-y: hidden; overflow-x: hidden;">
+    <h2 mat-dialog-title>{{description}}</h2>
+
+    <mat-dialog-content>
+        <div class="row" style="height:350px;overflow-y: hidden; overflow-x: hidden; ">
+            <div class="col-md-5 card" style="margin-left:45px;overflow:auto;height:100%;background-color:#f4f3ef;">
+                <p style="margin-top:15px"><b>Code Block</b></p>
+                <div class="card" style="padding:10px">
+                    <div><b>File Name : </b>{{CB1.FileName}}</div>
+                    <div><b>Start Line : </b>{{CB1.Start}}</div>
+                    <div><b>End Line : </b> {{CB1.End}}</div>
+                </div>
+                <div style="white-space: pre-line; line-height:15px;">{{formatSourceCode(CB1.Code)}}</div>
+            </div>
+            <div class="col-md-5 card" style="margin-left:45px;overflow:auto;height:100%;background-color:#f4f3ef;">
+                <p style="margin-top:15px"><b>Clone</b></p>
+                <div class="card" style="padding:10px">
+                    <div><b>File Name : </b>{{CB2.FileName}}</div>
+                    <div><b>Start Line : </b>{{CB2.Start}}</div>
+                    <div><b>End Line : </b> {{CB2.End}}</div>
+                </div>
+                <div style="white-space: pre-line; line-height:15px;">{{formatSourceCode(CB2.Code)}}</div>
+            </div>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button class="btn btn-secondary" style="margin-left:85%;margin-top:20px" (click)="close()">Close</button>
+    </mat-dialog-actions>
+</div>

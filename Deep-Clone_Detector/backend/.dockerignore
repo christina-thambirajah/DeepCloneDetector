@@ -1,0 +1,11 @@
+README.md
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+.pytest_cache
+/Model
+/CloneDetection/__pycache__
+/CloneDetection/ClassificationModel/__pycache__
+/CloneDetection/PostProcessing/__pycache__
+/CloneDetection/PreProcessing/__pycache__

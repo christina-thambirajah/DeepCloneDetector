@@ -1,0 +1,16 @@
+<div style="overflow-y: hidden; overflow-x: hidden;">
+    <h2 mat-dialog-title>{{currentProject.name}}</h2>
+
+    <mat-dialog-content >
+        What action would you like to take in this project?
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button class="btn btn-primary" style="margin-right:30px;margin-bottom:30px" (click)="viewClones()" >View Clones </button>
+        <button class="btn btn-outline-primary" style="margin-left:10px;margin-right:30px;margin-bottom:30px" (click)="viewAnalytics()" >View Analytics</button>
+        <div matTooltip="Cannot be deleted : Admin upload." [matTooltipDisabled]="!(buttonDisabled)">
+            <button class="btn btn-outline-danger" style="margin-left:10px;margin-right:30px;margin-bottom:30px" (click)="DeleteSourceCode()" [disabled]="buttonDisabled">Delete</button>
+        </div>
+        <button class="btn btn-secondary" style="margin-left:10px;margin-bottom:30px" (click)="close()" >Close</button>
+    </mat-dialog-actions>
+</div>

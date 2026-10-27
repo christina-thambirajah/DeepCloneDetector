@@ -1,0 +1,182 @@
+<div class="row" style="margin-top:100px;">
+  <div class="col-md-8">
+    <h3 style="margin-top:15px;">Clone Analysis of {{currentProject.name}}</h3>
+  </div>
+  <div class="col-md-4">
+    <select [ngModel]="currentProjectID" class="dropdown btn btn-neutral btn-outline-primary" style="width:250px;float:right;"
+      (ngModelChange)="onSelectChanged($event)">
+      <option *ngFor="let project of projects" [ngValue]="project.id">{{project.name}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+    <div class="card card-chart">
+      <div class="card-header">
+        Number of Files
+      </div>
+      <div class="card-body">
+        <div><b style="font-size:xx-large;color:rgb(74, 74, 74)">{{currentProject.statistics.numberOfFiles}} </b> files
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card card-chart">
+      <div class="card-header">
+        Lines of Code
+      </div>
+      <div class="card-body">
+        <div><b style="font-size:xx-large;color:rgb(74, 74, 74)">{{currentProject.statistics.numberOfLines}} </b> lines
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card card-chart">
+      <div class="card-header">
+        Number of Code Blocks
+      </div>
+      <div class="card-body">
+        <div><b style="font-size:xx-large;color:rgb(74, 74, 74)">{{currentProject.statistics.totalCodeBlocks}} </b> code
+          blocks</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card card-chart">
+      <div class="card-header">
+        Clone Percentage
+      </div>
+      <div class="card-body">
+        <div><b style="font-size:xx-large;color:rgb(74, 74, 74)">{{currentProject.statistics.clonePercentage}} </b> %
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card ">
+      <div class="card-header">
+        <h5 class="card-title">Clone Groups</h5>
+        <p class="card-category">Code blocks grouped by similarity</p>
+        <p class="card-category"></p>
+      </div>
+      <div class="card-body ">
+        <div *ngFor="let group of currentCloneList">
+          <h5>{{group[0]}}</h5>
+          <div class="table-responsive" style="overflow: auto;">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  File Name
+                </th>
+                <th>
+                  Start Line
+                </th>
+                <th>
+                  End Line
+                </th>
+              </thead>
+              <tbody *ngFor="let code of group[1]" (click)="OpenModel(code)">
+                <th class="th-row" style="font-weight:normal">
+                  {{code.FileName}}
+                </th>
+                <th class="th-row" style="text-align:center">
+                  {{code.Start}}
+                </th>
+                <th class="th-row" style="text-align:center">
+                  {{code.End}}
+                </th>
+              </tbody>
+              
+            </table>
+          </div>
+        </div>
+        <div *ngIf="suggestionList.length == 0 || currentCloneList == undefined" style="width:100%;text-align:center;font-weight:normal">No clone groups were detected in this project</div>
+      </div>
+      <div class="card-footer ">
+        <div class="legend">
+        </div>
+        <hr>
+        <div class="stats">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Clone Prevention Suggestions</h5>
+        <p class="card-category">Clone pair and suggestion to remove them</p>
+      </div>
+      <div class="card-body">
+        <div *ngFor="let item of suggestionList;let itemIndex = index;" class="table-responsive" style="overflow: auto;">
+          <h5>Suggestion {{itemIndex + 1}}</h5>
+          <table class="table">
+            <thead class=" text-primary">
+              <th></th>
+              <th>
+                File Name
+              </th>
+              <th>
+                Start Line
+              </th>
+              <th>
+                End Line
+              </th>
+            </thead>
+            <tbody (click)="OpenModelSuggestion(item)">
+              <tr>
+                <td class="text-primary" >
+                  Code Block
+                </td>
+                <td class="th-row" style="font-weight:normal;max-width:150px">
+                  {{item[1].FileName}}
+                </td>
+                <td class="th-row" style="font-weight:bold;text-align:center">
+                  {{item[1].Start}}
+                </td>
+                <td class="th-row" style="font-weight:bold;text-align:center">
+                  {{item[1].End}}
+                </td>
+              </tr>
+              <tr>
+                <td class="text-primary">
+                  Clone
+                </td>
+                <td class="th-row" style="font-weight:normal;max-width:150px">
+                  {{item[2].FileName}}
+                </td>
+                <td class="th-row" style="font-weight:bold;text-align:center">
+                  {{item[2].Start}}
+                </td>
+                <td class="th-row" style="font-weight:bold;text-align:center">
+                  {{item[2].End}}
+                </td>
+              </tr>
+              <tr>
+                <td class="text-primary">
+                  Suggestion
+                </td>
+                <td colspan="3">
+                  {{item[0]}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="suggestionList.length == 0 || currentCloneList == undefined" style="width:100%;text-align:center;font-weight:normal">No suggestions are available project</div>
+      </div>
+      <div class="card-footer">
+        <div class="chart-legend">
+        </div>
+        <hr />
+        <div class="card-stats">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

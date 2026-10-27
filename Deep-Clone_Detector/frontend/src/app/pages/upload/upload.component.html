@@ -1,0 +1,72 @@
+<div class="row" style="margin-top:125px;">
+  <div class="col-md-3">
+    <div class="card" style="height:75vh">
+      <div class="card-header ">
+        <h5 class="card-title">Source Code</h5>
+        <p class="card-category">All uploaded Java projects</p>
+      </div>
+      <div class="card-body" style="overflow:auto;">
+        <div *ngFor="let project of projects">
+          <button class="btn btn-outline-default" style="width:100%" (click)="selectProject(project)"
+            matTooltip="Click to View Options">{{project.name}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="card card-chart" style="height:75vh">
+      <div class="card-header">
+        <h5 class="card-title">Upload Code Here</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-9 pr-1">
+              <label>Upload Project (Only accepts a zip File)</label>
+              <br>
+              <input type="file" formControlName="path" class="form-control" accept=".zip,.7zip"
+                (change)="onFileUpload($event)" />
+              <div [hidden]="path.valid || path.untouched">
+                <div style="font-size:small;color:red" [hidden]="!path.hasError('required')">
+                  * Zip File is required.
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-9 pr-1">
+              <div class="form-group">
+                <label>Name of the Project</label>
+                <input type="text" formControlName="name" class="form-control" placeholder="Insert Name Here">
+                <div [hidden]="name.valid || name.untouched">
+                  <div style="font-size:small;color:red" [hidden]="!name.hasError('maxlength')">
+                    * Name can not be longer than 100 characters.
+                  </div>
+                  <div style="font-size:small;color:red" [hidden]="!name.hasError('required')">
+                    * Name is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div matTooltip="Fill the inputs above to enable the button" [matTooltipDisabled]="!(!uploadForm.valid)">
+                <div class="update" style="margin-left:20px">
+                  <button type="submit" class="btn btn-primary btn-round"
+                    [disabled]="buttonDisabled || !uploadForm.valid">
+                    Upload Source Code
+                  </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <br>
+        <div [hidden]="hideProgressBar">
+          <mat-progress-bar mode="determinate" value="{{uploadService.getPostProgress()}}"></mat-progress-bar>
+          <br>
+          <div style="text-align:right">{{uploadService.getPostStatus()}}</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+
+<div class="sidebar-wrapper">
+  <div class="logo">
+    <a href="http://localhost:4200" class="simple-text logo-mini" style="width:50px">
+      <div class="logo-image-small" style="width:50px">
+        <img src="assets/img/dcd-logo.png">
+      </div>
+    </a>
+    <h5 style="margin-bottom:5px;margin-top:8px">Deep-Clone Detector</h5>
+  </div>
+    <ul class="nav">
+        <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
+            <a [routerLink]="[menuItem.path]">
+                <i class="nc-icon {{menuItem.icon}}"></i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+    </ul>
+</div>
